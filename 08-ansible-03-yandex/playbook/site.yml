@@ -11,7 +11,7 @@
     - name: Get clickhouse distrib
       ansible.builtin.get_url:
         url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
-        dest: "~/{{ item }}-{{ clickhouse_version }}.rpm"
+        dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
       with_items: "{{ clickhouse_packages }}"
     - name: Get clickhouse-common-static distrib
       ansible.builtin.get_url:
@@ -19,11 +19,11 @@
         dest: "~/clickhouse-common-static-{{ clickhouse_version }}.rpm"
     - name: Install clickhouse packages
       become: true
-      ansible.builtin.dnf:
+      ansible.builtin.yum:
         name:
-          - ~/clickhouse-common-static-{{ clickhouse_version }}.rpm
-          - ~/clickhouse-client-{{ clickhouse_version }}.rpm
-          - ~/clickhouse-server-{{ clickhouse_version }}.rpm
+          - ./clickhouse-common-static-{{ clickhouse_version }}.rpm
+          - ./clickhouse-client-{{ clickhouse_version }}.rpm
+          - ./clickhouse-server-{{ clickhouse_version }}.rpm
       notify: Start clickhouse service
     - name: Flush handlers
       meta: flush_handlers
@@ -45,12 +45,12 @@
     - name: Get vector distrib
       ansible.builtin.get_url:
         url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm"
-        dest: "~/vector-{{ vector_version }}.rpm"
+        dest: "./vector-{{ vector_version }}.rpm"
     - name: Install vector packages
       become: true
-      ansible.builtin.dnf:
+      ansible.builtin.yum:
         name:
-          - ~/vector-{{ vector_version }}.rpm
+          - ./vector-{{ vector_version }}.rpm
     - name: Vector | Apply template
       become: true
       ansible.builtin.template:
@@ -84,6 +84,11 @@
       ansible.builtin.yum:
         name: git
         state: present
+    - name: Lighthouse | Install epel-release
+      become: true
+      ansible.builtin.yum:
+        name: epel-release
+        state: present        
     - name: Lighhouse | Install nginx
       become: true
       ansible.builtin.yum:

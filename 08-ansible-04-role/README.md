@@ -6,7 +6,7 @@
 
 [lighthouse](https://github.com/gambrilus/lighthouse-role.git)
 
-playbook
+[playbook](https://github.com/gambrilus/mnt-homeworks/tree/MNT-video/08-ansible-04-role/playbook)
 
 ---
 

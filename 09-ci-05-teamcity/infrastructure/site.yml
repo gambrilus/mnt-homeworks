@@ -74,13 +74,13 @@
         line: "run_as_user=\"{{ nexus_user_name }}\""
         regexp: "^run_as_user"
 
-    - name: Raise nofile limit for Nexus user
-      become: true
-      pam_limits:
-        domain: "{{ nexus_user_name }}"
-        limit_type: "-"
-        limit_item: nofile
-        value: "{{ nexus_ulimit }}"
+    # - name: Raise nofile limit for Nexus user
+    #   become: true
+    #   pam_limits:
+    #     domain: "{{ nexus_user_name }}"
+    #     limit_type: "-"
+    #     limit_item: nofile
+    #     value: "{{ nexus_ulimit }}"
 
     - name: Create Nexus service for SystemD
       become: true

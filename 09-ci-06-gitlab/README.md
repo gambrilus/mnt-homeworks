@@ -23,6 +23,51 @@
 8.* (задание необязательное к выполению) При комите в ветку master после сборки должен подняться pod в kubernetes. Примерный pipeline для push в kubernetes по [ссылке](https://github.com/awertoss/devops-netology/blob/main/09-ci-06-gitlab/gitlab-ci.yml).
 Если вы еще не знакомы с k8s - автоматизируйте сборку и деплой приложения в docker на виртуальной машине.
 
+### Ответ Devops
+Dockerfile 
+
+```
+FROM centos:7
+
+RUN yum install python3 python3-pip -y
+COPY requerements.txt requerements.txt
+RUN pip3 install -r requerements.txt
+RUN mkdir /python_api
+COPY python-api.py /python-api/python-api.py
+CMD ("python3", "python-api.py")
+```
+
+gitlab-ci.yaml
+
+```
+stages:
+  - build
+  - deploy
+image: docker:20.10.5
+services:
+  - docker:20.10.5-dind
+builder:
+    stage: build
+    script:
+        - docker build -t some_local_build:latest
+    except:
+        - main
+deployer:
+    stage: deploy
+    script:
+        - docker build -t $CI_REGISTRY/gambrilus/netology/gitlab-$CI_COMMIT_SHORT_SHA:latest .
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker push $CI_REGISTRY/gambrilus/netology/gitlab-$CI_COMMIT_SHORT_SHA:latest
+    only:
+        - main
+```
+
+
+Сборка прошла успешно 
+
+
+Образ появился
+
 ### Product Owner
 
 Вашему проекту нужна бизнесовая доработка: нужно поменять JSON ответа на вызов метода GET `/rest/api/get_info`, необходимо создать Issue в котором указать:
@@ -31,6 +76,8 @@
 2. Текст с `{ "message": "Already started" }` на `{ "message": "Running"}`.
 3. Issue поставить label: feature.
 
+
+Готово
 ### Developer
 
 Пришёл новый Issue на доработку, вам нужно:
@@ -39,13 +86,15 @@
 2. Внести изменения по тексту из задания.
 3. Подготовить Merge Request, влить необходимые изменения в `master`, проверить, что сборка прошла успешно.
 
-
+Готово
 ### Tester
 
 Разработчики выполнили новый Issue, необходимо проверить валидность изменений:
 
 1. Поднять докер-контейнер с образом `python-api:latest` и проверить возврат метода на корректность.
 2. Закрыть Issue с комментарием об успешности прохождения, указав желаемый результат и фактически достигнутый.
+
+Готово:
 
 ## Итог
 

@@ -1,4 +1,4 @@
-# Домашнее задание к занятию 14 «Средство визуализации Grafana»
+![Снимок экрана от 2023-11-09 21-03-03](https://github.com/gambrilus/mnt-homeworks/assets/100866321/17646e8e-c650-4ee2-9952-52636b28a82d)# Домашнее задание к занятию 14 «Средство визуализации Grafana»
 
 ## Задание повышенной сложности
 
@@ -27,6 +27,7 @@
 1. Решение домашнего задания — скриншот веб-интерфейса grafana со списком подключенных Datasource.
 
 Ответ:
+![Снимок экрана от 2023-11-09 19-59-21](https://github.com/gambrilus/mnt-homeworks/assets/100866321/468aef04-e6d6-4747-a6d1-2dab4f4b034a)
 
 
 ## Задание 2
@@ -48,6 +49,7 @@
 
 
 Ответ:
+![Снимок экрана от 2023-11-09 20-51-28](https://github.com/gambrilus/mnt-homeworks/assets/100866321/ddb7d30a-d2bf-4c0f-af3c-de00dd3fdd16)
 
 Запрос утилизации CPU
 ```
@@ -78,6 +80,8 @@ node_filesystem_avail_bytes{job="nodeexporter",device="/dev/sda5"}
 1. В качестве решения задания приведите скриншот вашей итоговой Dashboard.
 
 Ответ:
+![Снимок экрана от 2023-11-09 21-03-03](https://github.com/gambrilus/mnt-homeworks/assets/100866321/a449eabc-391e-4c46-8720-32bdb62a60fb)
+
 
 
 
